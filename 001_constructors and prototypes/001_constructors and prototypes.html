@@ -1,0 +1,124 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>The HTML5 Herald</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+
+  <!-- <link rel="stylesheet" href="css/styles.css?v=1.0"> -->
+
+</head>
+
+<body>
+  <script>
+  //-----------------------------------------------------------------task 0
+  function Box(height, width, depth, material){
+    this.height = height;
+    this.width = width;
+    this.depth = depth;
+    this.material = material;
+
+    this.volume = function (){
+      return this.height*this.width*this.depth;
+    }
+    this.equals = function(object){
+      return this.material == object.material;
+    }
+  }
+
+  var box1 = new Box(50,50,50,'paper');
+  var box2 = new Box(100,50,75,'paper');
+
+  document.write('box1 volume is' + box1.volume()+'<br>');
+  document.write('box2 volume is' + box2.volume()+'<br>');
+  document.write(box1.equals(box2)+'<br>');
+
+  //------------------------------------------------------------------task 1
+  document.write('<h3>Task 1</h3>');
+  function Cat(name, age) {
+
+      // instance properties
+      this.name = name;
+      this.age = age;
+
+      // instance methods
+      this.print = function () {
+          document.write('Cat\'s name is ' + this.name + ", and it is " + this.age + ' years old <br />');
+      }
+  }
+
+  // constructor function property (analogue of static properties).
+  Cat.MaxAge = 30;
+
+  // constructor function method (analogue of static method).
+  Cat.any = function () {
+      return new Cat('Any', 1) // this is not allowed to use
+  }
+
+  var kitty = new Cat('Cassiopea', 5);
+  kitty.print();
+
+  // usage of constructor function property and method
+  Cat.any().print();
+
+
+  //----------------------------------------------------------------task 2
+  document.write('<h3>Task 2</h3>');
+  function Human(name, sex, age){
+    this.name = name;
+    this.sex = sex;
+    this.age = age;
+    this.print = function(){
+      document.write(this.name+', '+this.sex+', '+this.age+'.<br>');
+    }
+
+  }
+  var items=[
+    new Human('Alex','man',26),
+    new Human('Helen', 'woman',31),
+    new Human('Mick', 'man',4),
+    new Human('Andrew', 'man', 17)
+  ];
+  document.write("===============================================Before sorting by name:====================================<br />");;
+  for(var i=0;i<items.length;i++){
+    items[i].print();
+  }
+  items.sort(function(a,b){
+    if (a.name > b.name) {
+      return 1;
+    }
+    if (a.name < b.name) {
+      return -1;
+    }
+    return 0;
+  });
+  document.write("===============================================After sorting by name:====================================<br />");
+  for(var i=0;i<items.length;i++){
+    items[i].print();
+  }
+  //---------------------------------------------------------------task 3
+  document.write('<h3>Task 3</h3>');
+  //function constructor level property for Human (task 2)
+  Human.race = "human";
+  //function constructor level method for Human
+  Human.addHuman = function(){
+    return new Human('Natalie','woman',29);
+  }
+  document.write("===============================================Using function constructor method:====================================<br />");
+  Human.race="super human";
+  Human.addHuman().print();
+
+  //---------------------------------------------------------------task 4
+  document.write('<h3>Task 4</h3>');
+  // override the toString method from Object
+  Human.prototype.toString=function(){
+      document.write('This is '+ this.name+', '+this.sex+', '+this.age+' printed with a new toString() method.<br>');
+  }
+  items[0].toString();
+
+  </script>
+</body>
+</html>
